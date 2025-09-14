@@ -1,0 +1,53 @@
+I'll look up the R-strategies (Recycle, Remanufacture, Repair, Reuse) for the Truck and find their costs and services.Now let me get the specific services performed in each R-strategy by looking into the IndividualServices collections:Perfect! Based on the data from your database, here are the **costs and services for each R-strategy** for the Truck:
+
+## R-Strategy Costs and Services
+
+### **1. Reuse - €5 total**
+- **Service Cost:** €0
+- **Shipping Cost:** €5
+- **Services Performed:** None (direct reuse without processing)
+
+---
+
+### **2. Recycle - €35 total**
+- **Service Cost:** €30
+- **Shipping Cost:** €5
+- **Services Performed:**
+  - **Cleaning** - Remove contaminants and debris
+  - **Disassembly** - Break down truck into component parts
+  - **Melting** - Process materials for raw material recovery
+
+---
+
+### **3. Remanufacture - €75 total**
+- **Service Cost:** €70
+- **Shipping Cost:** €5
+- **Services Performed:**
+  - **Cleaning** - Thorough cleaning of components
+  - **Disassembly** - Systematic breakdown of truck parts
+  - **Inspection and Sorting** - Quality assessment and categorization
+  - **Reconditioning** - Restore components to original specifications
+  - **Replacement** - Replace worn or damaged parts
+  - **Reassembly** - Rebuild truck to manufacturing standards
+  - **Testing** - Quality assurance and performance validation
+
+---
+
+### **4. Repair - €80 total**
+- **Service Cost:** €75
+- **Shipping Cost:** €5
+- **Services Performed:**
+  - **Cleaning** - Clean affected components
+  - **Disassembly** - Partial disassembly to access damaged parts
+  - **Inspection and Sorting** - Identify specific repair needs
+  - **Replacement with New Part** - Install new components as needed
+  - **Reassembly** - Reconstruct repaired sections
+  - **Testing** - Verify repair effectiveness
+
+## Cost Summary (from lowest to highest):
+1. **Reuse**: €5 (most cost-effective)
+2. **Recycle**: €35
+3. **Remanufacture**: €75 
+4. **Repair**: €80 (most expensive)
+
+The data shows that **Reuse** is the most economical option, while **Repair** is the most costly, likely due to the complexity of targeted fixes and new part requirements.

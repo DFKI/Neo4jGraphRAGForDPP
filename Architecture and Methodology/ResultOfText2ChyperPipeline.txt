@@ -1,0 +1,66 @@
+neo4jgraphragfordpp/DPP_GenAI_V02.py
+✅ Neo4j connection successful!
+
+
+> Entering new GraphCypherQAChain chain...
+Generated Cypher:
+MATCH (aas:AssetAdministrationShell)-[:HAS_SUBMODEL]->(costSM:Submodel)
+WHERE costSM.idShort = "CostOfRStrategies"
+WITH aas, costSM
+MATCH (costSM)-[:HAS_ELEMENT]->(rStrategy:SubmodelElementCollection)
+WHERE rStrategy.idShort IN ["Refurbish", "Remanufacture", "Reuse", "Repair", "Recycle"]
+OPTIONAL MATCH (rStrategy)-[:HAS_ELEMENT]->(desc:Property)
+WHERE desc.idShort = "description"
+OPTIONAL MATCH (rStrategy)-[:HAS_ELEMENT]->(indServices:SubmodelElementCollection)
+WHERE indServices.idShort = "IndividualServices"
+OPTIONAL MATCH (indServices)-[:HAS_ELEMENT]->(service:Property)
+WITH 
+  aas, 
+  rStrategy.idShort AS RStrategy, 
+  desc.value AS Description, 
+  collect(DISTINCT service.value) AS Services
+MATCH (rStrategy)-[:HAS_ELEMENT]->(totalServiceCost:Property)
+WHERE totalServiceCost.idShort = "TotalServiceCost"
+MATCH (rStrategy)-[:HAS_ELEMENT]->(shippingCost:Property)
+WHERE shippingCost.idShort = "ShippingCost"
+WITH 
+  aas, 
+  RStrategy, 
+  Description, 
+  Services, 
+  totalServiceCost.value AS TotalServiceCostStr, 
+  shippingCost.value AS ShippingCostStr
+WITH 
+  aas, 
+  RStrategy, 
+  Description, 
+  Services, 
+  toFloat(replace(TotalServiceCostStr, "€", "")) AS TotalServiceCost, 
+  toFloat(replace(ShippingCostStr, "€", "")) AS ShippingCost
+WITH
+  aas,
+  RStrategy,
+  Description,
+  Services,
+  TotalServiceCost,
+  ShippingCost,
+  (CASE WHEN TotalServiceCost IS NOT NULL AND ShippingCost IS NOT NULL THEN TotalServiceCost + ShippingCost ELSE NULL END) AS Cost
+RETURN
+  aas.idShort AS AssetAdministrationShellIdShort,
+  RStrategy,
+  Description,
+  Cost,
+  Services;
+Full Context:
+[{'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Recycle', 'Description': None, 'Cost': 75.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Recycle', 'Description': None, 'Cost': 5.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Recycle', 'Description': None, 'Cost': 80.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Recycle', 'Description': None, 'Cost': 35.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Remanufacture', 'Description': None, 'Cost': 75.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Remanufacture', 'Description': None, 'Cost': 5.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Remanufacture', 'Description': None, 'Cost': 80.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Remanufacture', 'Description': None, 'Cost': 35.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Repair', 'Description': None, 'Cost': 75.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Repair', 'Description': None, 'Cost': 5.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Repair', 'Description': None, 'Cost': 80.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Repair', 'Description': None, 'Cost': 35.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Reuse', 'Description': None, 'Cost': 75.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Reuse', 'Description': None, 'Cost': 5.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Reuse', 'Description': None, 'Cost': 80.0, 'Services': []}, {'AssetAdministrationShellIdShort': 'Truck', 'RStrategy': 'Reuse', 'Description': None, 'Cost': 35.0, 'Services': []}]
+
+> Finished chain.
+User Question: What is the cost of each R-strategy and what are the services performed during each R-strategy?
+Generated Answer from Cypher Results: The costs associated with each R-strategy for the asset "Truck" are as follows:
+
+- Recycle: Costs of 75.0, 5.0, 80.0, and 35.0
+- Remanufacture: Costs of 75.0, 5.0, 80.0, and 35.0
+- Repair: Costs of 75.0, 5.0, 80.0, and 35.0
+- Reuse: Costs of 75.0, 5.0, 80.0, and 35.0
+
+Regarding the services performed during each R-strategy, there are no services listed for any of the strategies.
