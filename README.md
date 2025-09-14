@@ -31,7 +31,7 @@ In case of question contact the authors. name.surname@dfki.de
 ## Authors and acknowledgment
 Monireh Pourjafarian, Christiane Plociennik, Peter Stein, Nastaran Moarefvand, Martin Ruskowski
 
-This paper is funded by the European Union – NextGenerationEU and BMBF Guideline for Funding Projects to Establish Data Competence Centers in Science within the framework of the DACE project (16DKZ2056E). The findings and opinions stated in this paper reflect the opinion of the authors and not the opinion of the European Union nor the BMBF.
+This paper is funded by the European Union – NextGenerationEU and BMBF Guideline for Funding Projects to Establish Data Competence Centers in Science within the framework of the DACE project (16DKZ2056E) https://www.dfki.de/web/forschung/projekte-publikationen/projekt/dace. The findings and opinions stated in this paper reflect the opinion of the authors and not the opinion of the European Union nor the BMBF.
 
 AAS Neo4j Integration Tool is built under the Twin4Trucks https://www.twin4trucks.de/ Project.\\
 
